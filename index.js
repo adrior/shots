@@ -28,25 +28,25 @@ app.get('/', function(req, res){
 });
 
 function renderSrc(url, filename, callback) {
-    console.log('Render src');
+    //console.log('Render src');
     var path = ROOT + 'src/' + filename;
     if (fs.existsSync(path)) {
-        console.log('Src exist');
+        //console.log('Src exist');
         callback(path);
     } else {
-        console.log('Generate src');
+        //console.log('Generate src');
         webshot(url, path , OPTIONS, function(err) {
-            console.log('Src ready');
+            //console.log('Src ready');
             callback(path);
         });
     }
 }
 
 function resize(filename, w, h, res) {
-    console.log('Start resizing');
+    //console.log('Start resizing');
     var src = ROOT + 'src/' + filename;
     if (!w||!h) {
-        console.log('Sending src');
+        //console.log('Sending src');
         res.sendFile(src);
     } else {
         var dir = w + 'x' + h + '/';
@@ -55,20 +55,20 @@ function resize(filename, w, h, res) {
         }
         var path = ROOT + dir + filename;
         if (fs.existsSync(path)) {
-            console.log('Resized exist');
+            //console.log('Resized exist');
             res.sendFile(path);
         } else {
             var opt = {src: src, dst: path, width: w, heigth: h};
-            console.log('Generate resized', opt);
+            //console.log('Generate resized', opt);
             easyimg.resize(opt).then(function(file){
-                console.log('Resized ready', file);
+                //console.log('Resized ready', file);
                 res.sendFile(path)
-            }, function(err){console.log(err);})
+            }, function(err){//console.log(err);})
         }
     }
 }
 
 
 var server = app.listen(3060, function() {
-    console.log('Listening on port %d', server.address().port);
+    //console.log('Listening on port %d', server.address().port);
 });
