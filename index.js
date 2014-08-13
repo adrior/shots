@@ -63,12 +63,12 @@ function resize(filename, w, h, res) {
             easyimg.resize(opt).then(function(file){
                 //console.log('Resized ready', file);
                 res.sendFile(path)
-            }, function(err){//console.log(err);})
+            }, function(err){console.log(err);})
         }
     }
 }
 
 
 var server = app.listen(3060, function() {
-    //console.log('Listening on port %d', server.address().port);
+    console.log('Listening on port %d', server.address().port);
 });
